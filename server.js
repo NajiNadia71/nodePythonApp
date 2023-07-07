@@ -16,12 +16,9 @@ app.get("/", (req, res) => {
 app.post("/convert", (req, res) => {
     try {
         let Input = req.body.input;
-        console.log(req.body, {Input});
         let largeDataSet = [];
 
-        fs.appendFile('src/InputUserFile', Input, function (err) {
-            if (err) throw err;
-        });
+
         const python = spawn('python', ['src/main.py', 'src/InputUserFile', 'result.lp']);
         python.stdout.on('data', function (data) {
             largeDataSet.push(data);
